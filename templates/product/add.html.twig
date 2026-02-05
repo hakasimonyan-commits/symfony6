@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter produit
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-5">
+		<h1 class="mb-4">Ajouter Produit</h1>
+
+		{{ form_start(form, {'attr': {'class': 'w-50'}}) }}
+
+		<div class="mb-3">
+			{{ form_label(form.name) }}
+			{{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+			{{ form_errors(form.name) }}
+		</div>
+
+		<div class="mb-3">
+			{{ form_label(form.description) }}
+			{{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+		</div>
+
+		<div class="mb-3">
+			{{ form_label(form.price) }}
+			{{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
+		</div>
+
+		<div class="mb-3">
+			{{ form_label(form.image) }}
+			{{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+		</div>
+
+		<div class="mb-3">
+			{{ form_label(form.dateAdd) }}
+			{{ form_widget(form.dateAdd, {'attr': {'class': 'form-control'}}) }}
+		</div>
+
+		<div class="mb-3">
+			{{ form_label(form.category) }}
+			{{ form_widget(form.category, {'attr': {'class': 'form-select'}}) }}
+		</div>
+
+		{{ form_widget(form.save, {'attr': {'class': 'btn btn-success'}}) }}
+		{{ form_end(form) }}
+
+
+	</div>
+{% endblock %}
