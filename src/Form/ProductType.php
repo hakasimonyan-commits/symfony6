@@ -2,13 +2,14 @@
 
 namespace App\Form;
 
-
-use App\Entity\Category;
 use App\Entity\Product;
+use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ProductType extends AbstractType
@@ -18,9 +19,15 @@ class ProductType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('price')
+            ->add('price', TextType::class, [
+                'mapped' => false,
+                'label' => 'Price',
+            ])
+
             ->add('image')
-            ->add('dateAdd')
+            ->add('dateAdd', DateType::class, [
+                'widget' => 'single_text',
+            ])
             ->add(
                 'category',
                 EntityType::class,

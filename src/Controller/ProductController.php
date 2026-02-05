@@ -33,8 +33,23 @@ final class ProductController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $rawPrice = $form->get('price')->getData(); //  ԱՅՍՏԵՂ Է ՃԻՇՏԸ
+
+            $normalizedPrice = preg_replace('/[^\d,\.]/', '', $rawPrice);
+            $normalizedPrice = str_replace(',', '.', $normalizedPrice);
+
+            $product->setPrice($normalizedPrice);
+
+
             $em->persist($product);
             $em->flush();
+
+            // dump($rawPrice);
+            //dump($normalizedPrice);
+            //die;
+
+            //if ($form->isSubmitted() && $form->isValid()) {
+
 
             $this->addFlash('success', 'Produit ajouté avec succès');
 
