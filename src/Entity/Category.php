@@ -22,6 +22,16 @@ class Category
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
+
+
+    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+    private ?\DateTimeImmutable $dateAdd = null;
+
+
+
     /**
      * @var Collection<int, Product>
      */
@@ -60,6 +70,29 @@ class Category
     {
         $this->description = $description;
 
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+        return $this;
+    }
+
+
+    public function getDateAdd(): ?\DateTimeImmutable
+    {
+        return $this->dateAdd;
+    }
+
+    public function setDateAdd(\DateTimeImmutable $dateAdd): self
+    {
+        $this->dateAdd = $dateAdd;
         return $this;
     }
 

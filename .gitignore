@@ -9,3 +9,6 @@
 /vendor/
 ###< symfony/framework-bundle ###
 .DS_Store
+.env
+.env.dev
+.editorconfig

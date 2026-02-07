@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Category;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -11,10 +12,24 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CategoryRepository extends ServiceEntityRepository
 {
+    private EntityManagerInterface $em;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Category::class);
+        $this->em = $this->getEntityManager();
     }
+
+    public function save(Category $entity, bool $flush = false): void
+    {
+        $this->em->persist($entity);
+
+        if ($flush) {
+            $this->em->flush();
+        }
+    }
+
+
 
     //    /**
     //     * @return Category[] Returns an array of Category objects

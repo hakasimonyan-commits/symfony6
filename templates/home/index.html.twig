@@ -1,10 +1,12 @@
-{% extends 'base.html.twig' %}
+{% if is_granted('ROLE_ADMIN') %}
+<h2>Bienvenue {{ app.user.prenom }}</h2>
+<p>Vous êtes administrateur de l’application.</p>
 
-{% block title %}Accueil{% endblock %}
+{% elseif is_granted('ROLE_EMPLOYEE') %}
+<h2>Bienvenue {{ app.user.prenom }} 👋</h2>
+<p>Vous êtes employé de l’association.</p>
 
-{% block body %}
-    <h1>{{ message }}</h1>
-    <p>{{ path }}</p>
-
-    <a href="/contact">Contact</a>
-{% endblock %}
+{% else %}
+<h2>Bienvenue {{ app.user.prenom }}</h2>
+<p>Vous êtes client.</p>
+{% endif %}

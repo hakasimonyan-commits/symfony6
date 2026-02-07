@@ -1,20 +1,84 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CategoryController!{% endblock %}
+{% block title %}Catégories{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="container mt-4">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Liste des catégories</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Applications/MAMP/htdocs/symfony6/src/Controller/CategoryController.php</code></li>
-        <li>Your template at <code>/Applications/MAMP/htdocs/symfony6/templates/category/index.html.twig</code></li>
-    </ul>
+    <a href="{{ path('app_category_add') }}" class="btn btn-primary mb-3">
+        Ajouter une catégorie
+    </a>
+
+    {# flash messages #}
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+    {% endfor %}
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Actions</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}</td>
+
+                <td>
+                    {% if category.image %}
+                    <img src="{{ asset('uploads/' ~ category.image) }}"
+                        style="width:60px; height:auto; border-radius:6px;">
+                    {% else %}
+                    <span class="text-muted">—</span>
+                    {% endif %}
+                </td>
+
+                <td>{{ category.name }}</td>
+                <td>{{ category.description }}</td>
+
+                {# Actions #}
+                <td>
+                    <a href="{{ path('app_category_edit', {id: category.id}) }}" class="btn btn-warning btn-sm me-1"
+                        title="Modifier">✏️</a>
+
+                    <form method="post" action="{{ path('app_category_delete', {id: category.id}) }}"
+                        style="display:inline">
+
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ category.id) }}">
+
+
+
+                        <button class="btn btn-danger btn-sm" onclick="return confirm('Supprimer la catégorie ?')"
+                            title="Supprimer">🗑️</button>
+                    </form>
+                </td>
+
+                {# Date #}
+                <td>
+                    {% if category.dateAdd %}
+                    {{ category.dateAdd|date('d/m/Y H:i') }}
+                    {% else %}
+                    —
+                    {% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="text-center">Aucune catégorie</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 </div>
 {% endblock %}
