@@ -1,12 +1,22 @@
-{% if is_granted('ROLE_ADMIN') %}
-<h2>Bienvenue {{ app.user.prenom }}</h2>
-<p>Vous êtes administrateur de l’application.</p>
+{% extends 'base.html.twig' %}
 
-{% elseif is_granted('ROLE_EMPLOYEE') %}
-<h2>Bienvenue {{ app.user.prenom }} 👋</h2>
-<p>Vous êtes employé de l’association.</p>
+{% block title %}Accueil{% endblock %}
 
-{% else %}
-<h2>Bienvenue {{ app.user.prenom }}</h2>
-<p>Vous êtes client.</p>
-{% endif %}
+{% block body %}
+<div class="container mt-4">
+
+    {% if is_granted('ROLE_ADMIN') %}
+    <h2>Bienvenue {{ app.user.prenom }}</h2>
+    <p>Vous êtes administrateur de l’application.</p>
+
+    {% elseif is_granted('ROLE_EMPLOYEE') %}
+    <h2>Bienvenue {{ app.user.prenom|upper }} 👋</h2>
+    <p>Vous faites partie de l’association.</p>
+
+    {% else %}
+    <h2>Bienvenue {{ app.user.prenom }} 😊</h2>
+    <p>Vous êtes client.</p>
+    {% endif %}
+
+</div>
+{% endblock %}
