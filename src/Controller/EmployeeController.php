@@ -35,7 +35,7 @@ final class EmployeeController extends AbstractController
                 ->getResult();
         }
 
-        return $this->render('employee/users.html.twig', [
+        return $this->render('user/index.html.twig', [
             'users' => $users,
         ]);
     }

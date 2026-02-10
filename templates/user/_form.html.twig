@@ -1,0 +1,26 @@
+{{ form_start(form) }}
+{# {{ form_widget(form) }} #}
+<div class="row">
+    <div class="col">
+        {{form_row(form.email)}}
+    </div>
+
+    <div class="row">
+        <div class="col">
+            {{form_row(form.roles,{value:form.vars.data.roles[0]})}}
+        </div>
+
+
+        <div class="row">
+            <div class="col">
+                {{form_row(form.nom)}}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                {{form_row(form.prenom)}}
+            </div>
+
+            <button class="btn">{{ button_label|default('Save') }}</button>
+            {{ form_end(form) }}

@@ -3,8 +3,20 @@
 {% block title %}Contact{% endblock %}
 
 {% block body %}
-<h1>Contact</h1>
-<p>Voici la page de contact</p>
+<div class="example-wrapper">
+    <h1>Contact</h1>
+    <p>Voici la page de contact {{ controller_name }}! ✅</p>
 
-<a href="/">Retour accueil</a>
+
+
+    {% include('home/_partial.html.twig') with {'coordonnees' : coordonnees,} %}<br>
+
+    {% include('home/_partial.html.twig') with {'coordonnees' : coordonnees1} %}
+
+
+
+
+</div>
+
+
 {% endblock %}
