@@ -5,6 +5,13 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Address;
+use App\Service\MessageGenerator;
+use App\Service\MailService;
+
+
 
 final class HomeController extends AbstractController
 {
@@ -34,5 +41,46 @@ final class HomeController extends AbstractController
                 "Adresse" => "Chez moi",
             ]
         ]);
+    }
+
+    #[Route('/send-mail', name: 'app_send_mail')]
+    public function sendTestMail(
+        MailerInterface $mailer,
+        MessageGenerator $msg
+    ): Response {
+        $email = (new Email())
+            ->from('haka.simonyan@gmail.com')
+            ->to('haka.simonyan@gmail.com')
+            ->subject('Test mail')
+            ->text($msg->getHappyMessage())
+            ->html(
+                $this->renderView('mail/email.html.twig', [
+                    'message' => $msg->getHappyMessage()
+                ])
+            );
+
+        $mailer->send($email);
+
+        return new Response('Service page');
+    }
+
+
+
+    #[Route('/service', name: 'app_service')]
+    public function service(MessageGenerator $msg): Response
+    {
+        return new Response($msg->getHappyMessage());
+    }
+
+
+    #[Route('/mail', name: 'app_mail')]
+    public function sendMail(MailService $mailService): Response
+    {
+        $mailService->send(
+            'haka.simonyan@gmail.com',
+            'Bienvenue'
+        );
+
+        return new Response('Mail envoyé via service');
     }
 }
