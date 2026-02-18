@@ -7,16 +7,33 @@
     <h1>Contact</h1>
     <p>Voici la page de contact {{ controller_name }}! ✅</p>
 
+    <p>
+        📧 Email :
+        <a href="mailto:contact@association.fr">
+            contact@association.fr
+        </a>
+    </p>
+
+    <p>
+        📞 Téléphone :
+        <a href="tel:+33612345678">
+            06 12 34 56 78
+        </a>
+    </p>
+
 
 
     {% include('home/_partial.html.twig') with {'coordonnees' : coordonnees,} %}<br>
 
     {% include('home/_partial.html.twig') with {'coordonnees' : coordonnees1} %}
 
+    <div class="mt-4 d-flex align-items-center">
+        <a href="{{ path('app_user_index') }}">
+            ← Retour à la liste
+        </a>
 
 
+    </div>
 
-</div>
 
-
-{% endblock %}
+    {% endblock %}

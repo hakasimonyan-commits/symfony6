@@ -4,7 +4,7 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": ">8.3",
+        "php": ">=8.3",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/doctrine-bundle": "^3.2.2",
@@ -28,7 +28,8 @@
         "symfony/yaml": "8.0.*"
     },
     "require-dev": {
-        "symfony/maker-bundle": "^1.65.1"
+        "symfony/maker-bundle": "^1.65.1",
+        "symfony/web-profiler-bundle": "8.0.*"
     },
     "config": {
         "allow-plugins": {

@@ -7,9 +7,7 @@
 
     <h1>Liste des catégories</h1>
 
-    <a href="{{ path('app_category_add') }}" class="btn btn-primary mb-3">
-        Ajouter une catégorie
-    </a>
+
 
     {# flash messages #}
     {% for message in app.flashes('success') %}
@@ -47,9 +45,8 @@
                 <td>{{ category.description }}</td>
 
                 {# Actions #}
-                <td>
-                    <a href="{{ path('app_category_edit', {id: category.id}) }}" class="btn btn-warning btn-sm me-1"
-                        title="Modifier">✏️</a>
+                <td><br>
+                    <a href="{{ path('app_category_edit', {id: category.id}) }}" title="Modifier">✏️</a><br><br>
 
                     <form method="post" action="{{ path('app_category_delete', {id: category.id}) }}"
                         style="display:inline">
@@ -58,7 +55,7 @@
 
 
 
-                        <button class="btn btn-danger btn-sm" onclick="return confirm('Supprimer la catégorie ?')"
+                        <button class="btn" onclick="return confirm('Supprimer la catégorie ?')"
                             title="Supprimer">🗑️</button>
                     </form>
                 </td>
@@ -79,6 +76,8 @@
             {% endfor %}
         </tbody>
     </table>
-
+    <a href="{{ path('app_category_add') }}" class="btn btn-primary mb-3">
+        Ajouter une catégorie
+    </a>
 </div>
 {% endblock %}
