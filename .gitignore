@@ -12,3 +12,14 @@
 .env
 .env.dev
 .editorconfig
+
+
+# IDE
+.vscode/
+
+# Uploads (user files)
+public/uploads/
+
+# Symfony dev tools
+config/packages/web_profiler.yaml
+config/routes/web_profiler.yaml
